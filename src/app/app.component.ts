@@ -1,45 +1,28 @@
-import { Component } from '@angular/core';
-
-import {HeroService} from "./hero.service";
+import {Component, OnInit} from '@angular/core';
+import {NewsService} from './service/news.service';
+import {News} from './model/news';
 
 @Component({
   selector: 'my-app',
-  providers: [HeroService],
-  template: `<h1>Hello {{name}} and then we will have more info</h1>
-    
-    <ul>
-      <li *ngFor="let hero of heroes" (click)="onClick(hero)">
-        {{hero}}
-      </li>
-    </ul>
-  
-  
-    <button (click)="getHero()"> Get Random Hero from service </button><br/>
-  
-    MyHero: {{myHero}}
-  
-    <div *ngIf="errorMessage">
-      {{errorMessage}}
-    </div>
-  `,
+  templateUrl: './app.component.html'
 })
-export class AppComponent  {
-  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-  myHero = this.heroes[0];
+export class AppComponent implements OnInit {
 
-  errorMessage : string;
+  private newsList: News[];
+  private errMsa: string;
 
-  constructor(private heroSerivce : HeroService){
+  constructor(private newsSerivce: NewsService) {
   }
 
-  onClick(hero : string){
-    this.myHero = hero;
+  ngOnInit(): void {
+    this.getAll();
   }
 
-  getHero(){
-    this.heroSerivce.getRandomHero().subscribe(
-      hero => this.myHero = hero,
-      error =>  this.errorMessage = <any>error);
-  }
 
+  getAll() {
+    this.newsSerivce.getAllNews().subscribe(
+      newsList => this.newsList = newsList,
+      error => this.errMsa = error
+    );
+  }
 }

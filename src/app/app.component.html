@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News management system</title>
+</head>
+<body>
+<ng-container *ngIf="newsList">
+  <ng-container *ngFor="let news of newsList">
+    ID : {{news.id}}<br/>
+    TITLE : {{news.title}}<br/>
+    DATE : {{news.date}}<br/>
+    BRIEF : {{news.brief}}<br/>
+    CONTENT : {{news.content}}<br/>
+  <br/>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!newsList">
+  <h1>No News, sorry!</h1>
+</ng-container>
+
+<button (click)="getAll()">GET NEWS</button>
+</body>
+</html>
