@@ -1,0 +1,11 @@
+.news:hover{
+    background-color: rebeccapurple;
+    cursor: pointer;
+}
+
+.news{
+    display: inline-block;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+}

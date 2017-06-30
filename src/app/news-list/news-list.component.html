@@ -1,0 +1,10 @@
+<ng-container *ngIf="newsList">
+    <div *ngFor="let news of newsList" (click)="onClick(news)" class="news">
+        ID : {{news.id}}<br/>
+        TITLE : {{news.title}}<br/>
+        DATE : {{news.date}}<br/>
+        BRIEF : {{news.brief}}<br/>
+        CONTENT : {{news.content}}<br/>
+        <br/>
+    </div>
+</ng-container>

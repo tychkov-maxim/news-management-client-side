@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>News management system</title>
-</head>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <button class="btn navbar-btn" routerLink="/all-news" routerLinkActive="active">Все новости</button>
+        <button class="btn navbar-btn" routerLink="/all-news" routerLinkActive="active">Добавить новость</button>
+    </div>
+</nav>
 <body>
-<ng-container *ngIf="newsList">
-  <ng-container *ngFor="let news of newsList">
-    ID : {{news.id}}<br/>
-    TITLE : {{news.title}}<br/>
-    DATE : {{news.date}}<br/>
-    BRIEF : {{news.brief}}<br/>
-    CONTENT : {{news.content}}<br/>
-  <br/>
-  </ng-container>
-</ng-container>
-
-<ng-container *ngIf="!newsList">
-  <h1>No News, sorry!</h1>
-</ng-container>
-
-<button (click)="getAll()">GET NEWS</button>
-
-
-<button (click)="getById(120)">GET NEWS BY ID</button>
-<ng-container *ngIf="news">
-    ID : {{news.id}}<br/>
-    TITLE : {{news.title}}<br/>
-    DATE : {{news.date}}<br/>
-    BRIEF : {{news.brief}}<br/>
-    CONTENT : {{news.content}}<br/>
-    <br/>
-</ng-container>
-
-<ng-container *ngIf="!news">
-  <h1>No News, sorry!</h1>
-</ng-container>
-
+<router-outlet></router-outlet>
 </body>
-</html>
+
+<div class="footer">
+
+</div>
