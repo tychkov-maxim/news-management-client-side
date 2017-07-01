@@ -5,7 +5,8 @@ import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
     selector: 'news-view',
-    templateUrl: './news-view.component.html'
+    templateUrl: './news-view.component.html',
+    styleUrls: ['./news-view.component.css']
 })
 export class NewsView implements OnInit {
 
@@ -26,6 +27,20 @@ export class NewsView implements OnInit {
     getNewsById(id: number) {
         this.newsService.getNewsById(id).subscribe(
             news => this.news = news,
+            error => this.errMsa = error
+        );
+    }
+
+    deleteNews(news: News) {
+        this.newsService.deleteNewsById(news.id).subscribe(
+            error => this.errMsa = error
+        );
+    }
+
+    saveNews(news: News) {
+        news.id = null;
+        this.newsService.saveNews(news).subscribe(
+            news1 => this.news = news1,
             error => this.errMsa = error
         );
     }

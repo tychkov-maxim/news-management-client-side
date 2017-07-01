@@ -1,8 +1,9 @@
-<ng-container *ngIf="news">
+<div *ngIf="news" class="news">
     ID : {{news.id}}<br/>
     TITLE : {{news.title}}<br/>
     DATE : {{news.date}}<br/>
     BRIEF : {{news.brief}}<br/>
     CONTENT : {{news.content}}<br/>
-    <br/>
-</ng-container>
+    <button (click)="deleteNews(news)">Удалить новость</button>
+    <button (click)="saveNews(news)">Сохранить новость</button>
+</div>
