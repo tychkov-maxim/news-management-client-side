@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsService} from '../service/news.service';
 import {News} from '../model/news';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
     selector: 'news-view',
@@ -14,7 +14,7 @@ export class NewsView implements OnInit {
     private news: News;
     private errMsa: string;
 
-    constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute) {
+    constructor(private newsService: NewsService, private activatedRoute: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -35,13 +35,11 @@ export class NewsView implements OnInit {
         this.newsService.deleteNewsById(news.id).subscribe(
             error => this.errMsa = error
         );
+
+        this.router.navigate(['all-news']);
     }
 
-    saveNews(news: News) {
-        news.id = null;
-        this.newsService.saveNews(news).subscribe(
-            news1 => this.news = news1,
-            error => this.errMsa = error
-        );
+    forwardEditNews(news: News) {
+        this.router.navigate(['edit-news', news.id]);
     }
 }

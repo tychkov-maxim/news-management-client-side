@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsService} from '../service/news.service';
 import {News} from '../model/news';
-import {Router} from '@angular/router';
+import {Router, RoutesRecognized} from '@angular/router';
 
 let breakException = {};
 
@@ -11,8 +11,6 @@ let breakException = {};
     styleUrls: ['./news-list.component.css']
 })
 export class NewsList implements OnInit {
-
-
     private newsList: News[];
     private errMsa: string;
     private selectedNews: number[] = [];
@@ -23,19 +21,32 @@ export class NewsList implements OnInit {
 
     ngOnInit(): void {
         this.getAll();
+        this.router.events
+            .subscribe((event) => {
+                if (event instanceof RoutesRecognized) {
+                    this.getAll();
+                }
+            });
     }
 
+
     getAll() {
-        this.newsService.getAllNews().subscribe(
-            newsList => this.newsList = newsList,
-            error => this.errMsa = error
-        );
+        this.newsService.getAllNews()
+            .subscribe(
+                newsList => this.newsList = newsList,
+                error => this.errMsa = error
+            );
     }
 
     deleteSelectedNews() {
         this.newsService.deleteListNewsByIds(this.selectedNews).subscribe(
+            any => {
+                this.getAll();
+                this.selectedNews = [];
+            },
             error => this.errMsa = error
         );
+
     }
 
     onClick(news: News) {
