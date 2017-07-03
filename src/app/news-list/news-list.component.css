@@ -1,9 +1,16 @@
-.news:hover{
+.news:hover {
     background-color: rebeccapurple;
     cursor: pointer;
 }
 
-.news{
+.news {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 1%;
+    padding: 1%;
+}
+
+.selectedIds {
     display: inline-block;
     border: 1px solid black;
     margin: 1%;
